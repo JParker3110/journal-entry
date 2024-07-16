@@ -5,7 +5,7 @@ export default function JournalEntry({ entry }) {
 
   return (
     <div className="journal-entry">
-      <h2>{title}</h2>
+      <h2>Write here</h2>
       <p className="date">{date}</p>
       <p>{content}</p>
     </div>
