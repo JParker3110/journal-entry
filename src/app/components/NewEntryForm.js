@@ -1,6 +1,7 @@
 // NewEntryForm.js
 import React from 'react';
 import Link from 'next/link';
+// import LogoutButton from './LogoutButton';
 
 
 export default function NewEntryForm({ onSubmit }) {
@@ -38,6 +39,8 @@ export default function NewEntryForm({ onSubmit }) {
                 <br></br>
               Main
             </Link>
+
+            {/* <LogoutButton /> */}
             {/* <Link
               className="m-1 text-purple-500 hover:text-purple-700"
               href="/Home"

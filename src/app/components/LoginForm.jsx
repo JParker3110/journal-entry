@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-
-export default function LoginForm({ onLogin }) {
+export default function LoginForm({ onLoginSuccess, onLoginError }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Simulate login logic (replace with your authentication method)
-    console.log("Login attempted:", username, password);
-    onLogin(true); // Simulate successful login (replace with actual logic)
-    setUsername('');
-    setPassword('');
+
+    try {
+      // Replace with your actual authentication logic (API call, form submission)
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+
+      const data = await response.json();
+      onLoginSuccess(data); // Call the provided function with login data (e.g., token)
+    } catch (error) {
+      onLoginError(error.message); // Call the provided function with error message
+    } finally {
+      setUsername('');
+      setPassword('');
+    }
   };
 
   return (
@@ -37,3 +53,12 @@ export default function LoginForm({ onLogin }) {
     </form>
   );
 }
+
+LoginForm.propTypes = {
+  onLoginSuccess: PropTypes.func.isRequired,
+  onLoginError: PropTypes.func.isRequired,
+};
+
+LoginForm.defaultProps = {
+  onLoginError: () => {},
+};
