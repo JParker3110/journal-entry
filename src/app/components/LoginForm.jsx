@@ -23,7 +23,7 @@ export default function LoginForm({ onLoginSuccess, onLoginError }) {
       const data = await response.json();
       onLoginSuccess(data); // Call the provided function with login data (e.g., token)
     } catch (error) {
-      onLoginError(error.message); // Call the provided function with error message
+      onLoginError(error.message); // Call the provided function with the error message
     } finally {
       setUsername('');
       setPassword('');
@@ -40,15 +40,18 @@ export default function LoginForm({ onLoginSuccess, onLoginError }) {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         required
+        style={{ backgroundColor: 'transparent' }}
       />
       <label htmlFor="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+<input
+  type="password"
+  id="password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+  required
+  style={{ backgroundColor: 'transparent' }} // Set background to transparent
+/>
+
       <button type="submit">Log In</button>
     </form>
   );

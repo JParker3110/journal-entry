@@ -1,79 +1,55 @@
-// import React from "react";
-"use client"
-import Link from "next/link";
+"use client";
 import React, { useState } from 'react';
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
-import LogoutButton from "./components/LogoutButton";
+import Link from 'next/link';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
+import LogoutButton from './components/LogoutButton';
 
+const Home = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const handleLogin = (loginStatus) => setIsLoggedIn(loginStatus);
+  const handleRegister = (registerStatus) => setIsLoggedIn(registerStatus);
+  const handleLogout = () => setIsLoggedIn(false);
 
-// import LogoutButton from './LogoutButton';
+  const backgroundImageStyle = {
+    backgroundImage: 'url(/journal.jpg)', // Reference your image here
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh',
+    margin: 0,
+    padding: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
 
+  const innerDivStyle = {
+    backgroundColor: 'transparent', // Set background to transparent
+    padding: '20px',
+    borderRadius: '10px',
+  };
 
-
-// export default function App() {
-    // const [isLoggedIn, setIsLoggedIn] = useState(false); // Logged in state
-  
-    const handleLogin = (loginStatus) => setIsLoggedIn(loginStatus);
-    const handleRegister = (registerStatus) => setIsLoggedIn(registerStatus);
-    const handleLogout = () => setIsLoggedIn(false);
-  
-//     return (
-//       <div className="login-register-app">
-//         {isLoggedIn ? (
-//           <div>
-//             <h1>Welcome!</h1>
-//             <LogoutButton onLogout={handleLogout} />
-//           </div>
-//         ) : (
-//           <div>
-//             <LoginForm onLogin={handleLogin} />
-//             <RegisterForm onRegister={handleRegister} />
-  
-
-const Home = () => (
-    
-
- <div className="flex flex-col text-orange-600 items-center justify-center min-h-screen p-6 bg-gray-100">
- <RegisterForm onRegister={handleRegister} />
- <br></br>
- <h1 className="mb-6 text-4xl font-bold text-pink-600">
-
- Welcome to Your Personal Journal App!!
-
- </h1>
-
- <p className="mb-6 text-lg text-teal-700">
-
- Where you can feel free to write your most inner thoughts.
-
- </p>
- 
-     
-      <LoginForm />
-
- {/* <Link
-              className="m-1 text-pink-500 hover:text-pink-700"
-              href="/"
-            >
-                <br></br>
-              Main
-            </Link> */}
-            <Link
-              className="m-8 font-bold text-purple-500 hover:text-purple-700"
-              href="/Home"
-            >
-            Journal Entry 
-            </Link>
-           
-
-
-            <LogoutButton />
- </div>
-
-);
-
-
+  return (
+    <div style={backgroundImageStyle}>
+      <div style={innerDivStyle} className="flex flex-col text-black-600 items-center justify-center min-h-screen">
+        <RegisterForm onRegister={handleRegister} />
+        <br />
+        <h1 className="mb-6 text-4xl font-bold text-pink-600">
+          Welcome to Your Personal Journal App!!
+        </h1>
+        <p className="mb-6 text-lg text-teal-700">
+          Where you can feel free to write your most inner thoughts.
+        </p>
+        <LoginForm onLoginSuccess={handleLogin} onLoginError={(error) => console.error(error)} />
+        <Link className="m-20 font-bold text-purple-500 hover:text-purple-700" href="/Home">
+          Journal Entry
+        </Link>
+        <LogoutButton onLogout={handleLogout} />
+      </div>
+    </div>
+  );
+};
 
 export default Home;

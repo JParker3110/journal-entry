@@ -24,15 +24,19 @@ export default function RegisterForm({ onRegister }) {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         required
+        style={{ backgroundColor: 'transparent' }}
       />
       <label htmlFor="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+
+<input
+  type="password"
+  id="password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+  required
+  style={{ backgroundColor: 'transparent' }} // Set background to transparent
+/>
+
       <button type="submit">Register</button>
     </form>
   );
