@@ -40,7 +40,7 @@ const Home = () => {
           Welcome to Your Personal Journal App!!
         </h1>
         <p className="mb-6 text-lg text-teal-700">
-          Where you can feel free to write your most inner thoughts.
+          Where you can feel free to write your most inner thoughts!!!
         </p>
         <LoginForm onLoginSuccess={handleLogin} onLoginError={(error) => console.error(error)} />
         <Link className="m-20 font-bold text-purple-500 hover:text-purple-700" href="/Home">
