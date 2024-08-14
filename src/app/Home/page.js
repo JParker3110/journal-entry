@@ -1,4 +1,4 @@
-// // Home/page.js
+
 "use client"; 
 
 import React, { useState, useEffect } from 'react';
@@ -6,8 +6,7 @@ import JournalEntry from '../components/JournalEntry';
 import NewEntryForm from '../components/NewEntryForm'; 
 import { initializeFirestore } from 'firebase/firestore';
 
-// Enable offline persistence for the web
-// initializeFirestore(app, { experimentalForceLongPolling: true }); // Adjust options as needed
+
 
 
 export default function Home() {

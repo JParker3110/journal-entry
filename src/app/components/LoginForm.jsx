@@ -12,13 +12,7 @@ export default function LoginForm({ onLoginSuccess, onLoginError }) {
     event.preventDefault();
 
     try {
-      // Replace with your actual authentication logic (API call, form submission)
-      // Example: const response = await fetch('/api/login', { ... });
-      // Handle response and extract relevant data (e.g., token)
-      // Call onLoginSuccess(data) if successful
-      // Otherwise, throw an error and call onLoginError(error.message)
-
-      // Simulating a successful login (remove this in your actual implementation)
+      
       setIsLoggedIn(true);
     } catch (error) {
       onLoginError(error.message);
@@ -29,7 +23,7 @@ export default function LoginForm({ onLoginSuccess, onLoginError }) {
   };
 
   const handleChange = (event) => {
-    // Handle input changes (update state)
+    
   };
 
   return (
@@ -46,7 +40,7 @@ export default function LoginForm({ onLoginSuccess, onLoginError }) {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            style={{ backgroundColor: 'transparent' }} // Set background to transparent
+            style={{ backgroundColor: 'transparent' }} 
           />
           <label htmlFor="password">Password:</label>
           <input
@@ -55,7 +49,7 @@ export default function LoginForm({ onLoginSuccess, onLoginError }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            style={{ backgroundColor: 'transparent' }} // Set background to transparent
+            style={{ backgroundColor: 'transparent' }} 
           />
           <button type="submit">Log In</button>
         </form>

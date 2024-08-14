@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function LogoutButton({ onLogout }) {
   const handleLogout = () => {
-    onLogout(false); // Set logged in state to false
+    onLogout(false); 
   };
 
   return <button onClick={handleLogout}>Logout</button>;
