@@ -1,38 +1,40 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { login } from '../utils/authUtils';
-import { getAuth } from 'firebase/auth';
+import React, { useState } from "react";
+import { login } from "../utils/authUtils";
 
-export default function LoginForm({ onLoginSuccess, onLoginError }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState("");
 
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    
     try {
-      
-      setIsLoggedIn(true);
-    } catch (error) {
-      onLoginError(error.message);
+      await login(email, password);
+      // Optionally navigate to another page
+      router.push("/home"); // Redirect to home page or dashboard
+      setEmail("");
+      setPassword("");
+    } catch (err) {
+      setError("Login failed. Please check your email and password.");
+      console.error("Error logging in:", err);
     } finally {
-      setUsername('');
-      setPassword('');
+      setLoading(false);
     }
   };
 
-  const handleChange = (event) => {
-    
-  };
 
   return (
-    <div>
-      {isLoggedIn ? (
-        <p>Welcome, {username}!</p>
-      ) : (
+  
         <form onSubmit={handleSubmit}>
-          <h2>Login</h2>
+          {/* <h2>Login</h2> */}
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -54,11 +56,10 @@ export default function LoginForm({ onLoginSuccess, onLoginError }) {
           <button type="submit">Log In</button>
         </form>
       )}
-    </div>
-  );
-}
 
-LoginForm.propTypes = {
-  onLoginSuccess: PropTypes.func.isRequired,
-  onLoginError: PropTypes.func.isRequired,
-};
+
+export default LoginPage;
+
+
+
+

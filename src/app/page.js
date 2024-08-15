@@ -13,7 +13,7 @@ const Home = () => {
   const handleLogout = () => setIsLoggedIn(false);
 
   const backgroundImageStyle = {
-    backgroundImage: 'url(/journal.jpg)', // Reference your image here
+    backgroundImage: 'url(/journal.jpg)', 
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: '100vh',
@@ -26,7 +26,7 @@ const Home = () => {
   };
 
   const innerDivStyle = {
-    backgroundColor: 'transparent', // Set background to transparent
+    backgroundColor: 'transparent', 
     padding: '20px',
     borderRadius: '10px',
   };
@@ -35,7 +35,9 @@ const Home = () => {
     <div style={backgroundImageStyle}>
       <div style={innerDivStyle} className="flex flex-col text-black-600 items-center justify-center min-h-screen">
         <RegisterForm onRegister={handleRegister} />
-        <br />
+        <br/>
+        <br/>
+        <br/>
         <h1 className="mb-6 text-4xl font-bold text-pink-600">
           Welcome to Your Personal Journal App!!
         </h1>
