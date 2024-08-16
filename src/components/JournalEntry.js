@@ -1,11 +1,6 @@
-
-
 import React from 'react';
-
-
 const JournalEntry = ({ entry }) => {
   const { title, content, date } = entry;
-
   return (
     <div className="journal-entry">
       <h2>{title}</h2>
@@ -14,5 +9,4 @@ const JournalEntry = ({ entry }) => {
     </div>
   );
 };
-
 export default JournalEntry;
