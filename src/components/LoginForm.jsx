@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { loginUser } from '../utils/authUtils'; // Make sure to create this function in your authUtils file
+import { login } from '../utils/authUtils'; // Make sure to create this function in your authUtils file
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,10 +10,10 @@ const LoginForm = () => {
     setLoading(true);
     setError("");
     try {
-      await loginUser(email, password);
+      await login(email, password);
       setEmail("");
       setPassword("");
-      // router.push("/dashboard");  // Redirect to dashboard or another page after successful login
+      window.location.href = "/Management";
     } catch (err) {
       setError("Login failed. Please check your credentials and try again.");
       console.error("Login Error:", err);  // Log the error to the console
@@ -22,32 +22,53 @@ const LoginForm = () => {
     }
   };
   return (
-    <div className=" top-0 left-0 w-full h-full flex justify-center items-center" style={{ backgroundColor: "transparent" }}>
+    <div className="top-0 left-0 w-full h-full flex justify-center items-center" style={{ backgroundColor: "transparent" }}>
       <div>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="text-black"
-            style={{ backgroundColor: 'white' }}
-          />
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="text-black"
-            style={{ backgroundColor: 'white' }}
-          />
-          <button type="submit" disabled={loading} style={{ padding: '10px', border: 'none', borderRadius: '4px', backgroundColor: '#234PFF', color: '#fff' }}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
+          <div className="flex items-center space-x-4 mb-4">
+            <div className="flex-1 text-pink-600">
+              <label htmlFor="login-email" style={{ fontWeight: 'bold', fontSize: '1.150rem' }}>Email:</label>
+              <input
+                type="email"
+                id="login-email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="text-purple-950  w-full"
+                style={{ backgroundColor: 'white' }}
+              />
+            </div>
+            <div className="flex-1 text-pink-600">
+              <label htmlFor="login-password" style={{ fontWeight: 'bold', fontSize: '1.150rem' }}>Password:</label>
+              <input
+                type="password"
+                id="login-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="text-purple-950 w-full"
+                style={{ backgroundColor: 'white' }}
+              />
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              disabled={loading}
+              style={{
+                padding: '10px',
+                border: 'none',
+                borderRadius: '4px',
+                backgroundColor: '#234PFF',
+                color: '#fff',
+                cursor: 'pointer',
+                transition: 'background-color 0.3s ease',
+              }}
+              className="hover:bg-pink-500"
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </div>
           {error && <p style={{ color: 'red' }}>{error}</p>}
         </form>
       </div>

@@ -36,12 +36,12 @@ const Home = () => {
             <br />
             <br />
             <br />
-            <h1 className="mb-6 text-4xl font-bold text-black">
+            <h1 className="mb-6 text-4xl font-bold text-teal-500">
               Welcome to Your Personal Journal App!!
             </h1>
             <br></br>
             <br></br>
-            <p className="mb-6 text-lg text-black">
+            <p className="mb-6 text-lg text-purple-500">
               Where you can feel free to write your most inner thoughts!!!
             </p>
             <LoginForm onLoginSuccess={handleLogin} onLoginError={(error) => console.error(error)} />

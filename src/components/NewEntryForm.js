@@ -1,48 +1,51 @@
-// NewEntryForm.js
-import React from 'react';
-import Link from 'next/link';
-// import LogoutButton from './LogoutButton';
-export default function NewEntryForm({ onSubmit }) {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const newEntry = {
-      title: formData.get('title'),
-      content: formData.get('content'),
-    };
-    onSubmit(newEntry);
+import React, { useState, useEffect } from 'react';
+const NewEntryForm = ({ onSubmit, initialEntry = {}, isEditing = false }) => {
+  const [title, setTitle] = useState(initialEntry.title || '');
+  const [content, setContent] = useState(initialEntry.content || '');
+  useEffect(() => {
+    if (isEditing) {
+      setTitle(initialEntry.title || '');
+      setContent(initialEntry.content || '');
+    }
+  }, [initialEntry, isEditing]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit({ title, content, id: initialEntry.id });
+    if (!isEditing) {
+      setTitle('');
+      setContent('');
+    }
   };
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-      <input
-        name="title"
-        placeholder="Title"
-        required
-        style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', color: '#000' }}
-      />
-      <textarea
-        name="content"
-        placeholder="Content"
-        required
-        style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', color: '#000' }}
-      />
-      <button type="submit" style={{ padding: '10px', border: 'none', borderRadius: '4px', backgroundColor: '#234PFF', color: '#fff' }}>
-        Add Entry
+    <form onSubmit={handleSubmit} className="mb-6">
+      <div className="mb-4">
+        <label htmlFor="title" className="block text-sm font-bold mb-2">Title</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 rounded"
+          placeholder="Enter title"
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="content" className="block text-sm font-bold mb-2">Content</label>
+        <textarea
+          id="content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 rounded"
+          placeholder="Enter content"
+        />
+      </div>
+      <button
+        type="submit"
+        className="py-2 px-4 border-none rounded bg-green-600 text-white font-bold cursor-pointer transition-colors duration-300 hover:bg-green-700"
+      >
+        {isEditing ? 'Update Entry' : 'Add Entry'}
       </button>
-      <Link
-              className="m-8 font-bold text-pink-500 hover:text-pink-700"
-              href="/"
-            >
-                <br></br>
-              Main
-            </Link>
-            {/* <LogoutButton /> */}
-            {/* <Link
-              className="m-1 text-purple-500 hover:text-purple-700"
-              href="/Home"
-            >
-            Journal Entry
-            </Link> */}
     </form>
   );
-}
+};
+export default NewEntryForm;
